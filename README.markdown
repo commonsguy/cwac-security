@@ -155,7 +155,7 @@ has only been done using `HttpsURLConnection` and `OkHttp`. It should work with
 
 Version
 -------
-This is version v0.4.0 of this module, meaning it is rather new.
+This is version v0.4.1 of this module, meaning it is rather new.
 
 Demo
 ----
@@ -199,6 +199,7 @@ the fence may work, but it may not.
 
 Release Notes
 -------------
+- v0.4.1: updated for Android Studio 1.0 and new AAR publishing system
 - v0.4.0: added signature check and `signatureDiffers` to `PermissionUtils`
 - v0.3.1: added `cwac-` prefix to JAR
 - v0.3.0: added certificate memorization to `TrustManagerBuilder`
