@@ -18,6 +18,10 @@ HTTPS operations
 signing key of some package, to compare against known values, to help
 detect whether you are about to be communicating with some hacked version of an app
 
+- a `ZipUtils` class with an `unzip()` method, that safely handles
+a few types of malformed ZIP archives when attempting to unzip the
+contents to your desired directory
+
 This Android library project is 
 [available as a JAR](https://github.com/commonsguy/cwac-security/releases)
 or as an artifact for use with Gradle. To use that, add the following
@@ -31,7 +35,7 @@ repositories {
 }
 
 dependencies {
-    compile 'com.commonsware.cwac:security:0.4.+'
+    compile 'com.commonsware.cwac:security:0.5.+'
 }
 ```
 
@@ -140,9 +144,37 @@ tampered with, whoever does the tampering would likely remove your call to
 `getOwnSignatureHash()` as a part of that tampering. Hence, this will only catch
 stupid attackers, which may or may not be worth the investment in effort.
 
+Usage: ZipUtils
+---------------
+Use the static `unzip()` methods to unzip a ZIP-style archive. Both methods
+have the same first pair of parameters:
+
+- a `File` pointing to the ZIP archive
+
+- a `File` pointing to the destination directory where the ZIP archive
+should be unzipped (note: this directory does not have to already exist)
+
+One `unzip()` method just takes those parameters. The other takes
+a pair of additional integers:
+
+- the maximum number of entries in the ZIP archive; archives with
+more entries than this will be rejected
+
+- the maximum size in bytes of any single entry; archives with an
+entry larger than this will be rejected
+
+Both `unzip()` methods throw a `ZipUtils.UnzipException` if there
+is a problem. They will also "roll back" any existing work, so
+the destination directory will not exist if `unzip()` throws an
+exception.
+
+The approach used here is based on
+[CERT's suggested unzip code](https://www.securecoding.cert.org/confluence/display/java/IDS04-J.+Safely+extract+files+from+ZipInputStream),
+with minor modifications to make it a bit more Android-friendly.
+
 Dependencies
 ------------
-This project has no dependencies. It is tested and supported on API Level 8 and
+This project has no runtime dependencies. It is tested and supported on API Level 8 and
 higher. It may well work on older devices, though that is unsupported and untested.
 If you determine that
 the library (not the demos) do not work on an older-yet-relevant
@@ -155,7 +187,7 @@ has only been done using `HttpsURLConnection` and `OkHttp`. It should work with
 
 Version
 -------
-This is version v0.4.1 of this module, meaning it is rather new.
+This is version v0.5.0 of this module, meaning it is rather new.
 
 Demo
 ----
@@ -170,6 +202,10 @@ aware of a public server that either uses a self-signed certificate or
 a private certificate authority, one for which a demo app might make sense,
 and one where the maintainer of the server will not mind, please
 file an [issue](https://github.com/commonsguy/cwac-security/issues).
+
+There is an instrumentation test suite in the `androidTest`
+sourceset of the main `security` module. It contains a `ZipUtilsTest`
+class that tests the `ZipUtils` code.
 
 License
 -------
@@ -199,6 +235,7 @@ the fence may work, but it may not.
 
 Release Notes
 -------------
+- v0.5.0: reorganized `security` into official Android Studio structure, added `ZipUtils`
 - v0.4.1: updated for Android Studio 1.0 and new AAR publishing system
 - v0.4.0: added signature check and `signatureDiffers` to `PermissionUtils`
 - v0.3.1: added `cwac-` prefix to JAR
