@@ -1,8 +1,17 @@
 apply plugin: 'com.android.library'
 
+dependencies {
+    androidTestCompile 'com.android.support.test:rules:0.3'
+}
+
 android {
     compileSdkVersion 17
     buildToolsVersion "22.0.1"
+
+    defaultConfig {
+        testApplicationId "com.commonsware.cwac.security.test"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
 }
 
 // from http://stackoverflow.com/a/19484146/115145
