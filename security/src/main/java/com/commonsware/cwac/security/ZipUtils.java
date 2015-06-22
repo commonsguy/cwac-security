@@ -72,9 +72,9 @@ public class ZipUtils {
    * @param maxEntries throw an UnzipException if the ZIP
    *                   archive contains more than this number
    *                   of entries
-   * @param maxSize throw an UnzipException if any individual
-   *                entry in the ZIP archive is bigger than
-   *                this size in bytes
+   * @param maxSize throw an UnzipException if the sum of the
+   *                sizes of the entries in the ZIP archive is
+   *                bigger than this size in bytes
    * @throws UnzipException if something goes haywire
    */
   public static void unzip(File zipFile, File destDir,

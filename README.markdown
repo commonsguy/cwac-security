@@ -160,8 +160,8 @@ a pair of additional integers:
 - the maximum number of entries in the ZIP archive; archives with
 more entries than this will be rejected
 
-- the maximum size in bytes of any single entry; archives with an
-entry larger than this will be rejected
+- the maximum size in bytes of the unzipped contents; archives
+larger than this will be rejected
 
 Both `unzip()` methods throw a `ZipUtils.UnzipException` if there
 is a problem. They will also "roll back" any existing work, so
