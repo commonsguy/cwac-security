@@ -107,6 +107,7 @@ public class ZipUtils {
             }
 
             dest.flush();
+            fos.getFD().sync();
             dest.close();
 
             if (total + BUFFER_SIZE > maxSize) {
