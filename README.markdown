@@ -187,7 +187,7 @@ has only been done using `HttpsURLConnection` and `OkHttp`. It should work with
 
 Version
 -------
-This is version v0.5.0 of this module, meaning it is rather new.
+This is version v0.5.1 of this module, meaning it is rather new.
 
 Demo
 ----
@@ -235,6 +235,7 @@ the fence may work, but it may not.
 
 Release Notes
 -------------
+- v0.5.1: added `sync()` call to ensure stuff written to disk by the time `unzip()` returns
 - v0.5.0: reorganized `security` into official Android Studio structure, added `ZipUtils`
 - v0.4.1: updated for Android Studio 1.0 and new AAR publishing system
 - v0.4.0: added signature check and `signatureDiffers` to `PermissionUtils`
