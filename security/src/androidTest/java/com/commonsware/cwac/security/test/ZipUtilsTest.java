@@ -57,6 +57,18 @@ public class ZipUtilsTest {
   }
 
   @Test
+  public void unzipNormalExternalDirExists() throws IOException, ZipUtils.UnzipException {
+    File asset=new File(externalRoot, "asset.zip");
+    File destDir=new File(externalRoot, "result");
+
+    destDir.mkdirs();
+
+    copyAsset("WarOfTheWorlds.zip", asset);
+    ZipUtils.unzip(asset, destDir);
+    assertWarOfTheWorlds(destDir);
+  }
+
+  @Test
   public void unzipHugeExternal() throws IOException {
     File asset=new File(externalRoot, "asset.zip");
     File destDir=new File(externalRoot, "result");
@@ -104,6 +116,29 @@ public class ZipUtilsTest {
     catch (ZipUtils.UnzipException e) {
       Assert.assertTrue(e.getCause() instanceof IllegalStateException);
       Assert.assertFalse(destDir.exists());
+    }
+  }
+
+  @Test
+  public void unzipDirectoryNotEmpty() throws IOException {
+    File asset=new File(externalRoot, "asset.zip");
+    File destDir=new File(externalRoot, "result");
+
+    copyAsset("WarOfTheWorlds.zip", asset);
+
+    destDir.mkdirs();
+    new File(destDir, "thisExists.txt").createNewFile();
+
+    try {
+      ZipUtils.unzip(asset, destDir);
+      Assert.fail("Did not get IOException!");
+    }
+    catch (IOException e) {
+      Assert.assertTrue(destDir.exists());
+      Assert.assertEquals(1, destDir.listFiles().length);
+    }
+    catch (ZipUtils.UnzipException e2) {
+      Assert.fail("Got ZipUtils.UnzipException!");
     }
   }
 

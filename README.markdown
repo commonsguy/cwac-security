@@ -152,7 +152,8 @@ have the same first pair of parameters:
 - a `File` pointing to the ZIP archive
 
 - a `File` pointing to the destination directory where the ZIP archive
-should be unzipped (note: this directory does not have to already exist)
+should be unzipped (note: this directory does not have to already exist;
+if it does exist, it must be empty)
 
 One `unzip()` method just takes those parameters. The other takes
 a pair of additional integers:
@@ -164,9 +165,18 @@ more entries than this will be rejected
 larger than this will be rejected
 
 Both `unzip()` methods throw a `ZipUtils.UnzipException` if there
-is a problem. They will also "roll back" any existing work, so
-the destination directory will not exist if `unzip()` throws an
-exception.
+is a problem. If an `UnzipException` is thrown, `unzip()` will
+also "roll back" any existing work and delete the destination
+directory.
+
+Both `unzip()` methods can throw an `IOException`. This will indicate
+that the destination directory that you provided existed and was
+not empty. In this case, the destination directory is left alone.
+
+If you wish to unzip the archive, and have its contents go into
+a directory that already has files in it, you will need to first
+unzip to a temporary directory, then move over the files you
+want to move.
 
 The approach used here is based on
 [CERT's suggested unzip code](https://www.securecoding.cert.org/confluence/display/java/IDS04-J.+Safely+extract+files+from+ZipInputStream),

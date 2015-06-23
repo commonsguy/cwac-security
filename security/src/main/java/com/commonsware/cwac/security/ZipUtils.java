@@ -50,7 +50,8 @@ public class ZipUtils {
    * @param destDir the directory to unzip the contents to
    * @throws UnzipException if something goes haywire
    */
-  public static void unzip(File zipFile, File destDir) throws UnzipException {
+  public static void unzip(File zipFile, File destDir)
+      throws UnzipException, IOException {
     unzip(zipFile, destDir, DEFAULT_MAX_ENTRIES, DEFAULT_MAX_SIZE);
   }
 
@@ -78,15 +79,24 @@ public class ZipUtils {
    * @throws UnzipException if something goes haywire
    */
   public static void unzip(File zipFile, File destDir,
-                           int maxEntries, int maxSize) throws UnzipException {
+                           int maxEntries, int maxSize)
+      throws UnzipException, IOException {
+
+    if (destDir.exists()) {
+      if (destDir.list().length>0) {
+        throw new IOException("Your destination directory is not empty!");
+      }
+    }
+    else {
+      destDir.mkdirs();
+    }
+
     try {
       final FileInputStream fis=new FileInputStream(zipFile);
       final ZipInputStream zis=new ZipInputStream(new BufferedInputStream(fis));
       ZipEntry entry;
       int entries=0;
       long total=0;
-
-      destDir.mkdir();
 
       try {
         while ((entry=zis.getNextEntry()) != null) {
