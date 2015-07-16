@@ -13,7 +13,7 @@ scenarios and show where the problems arise, plus discuss how to
 mitigate them as best we can.
 
 **UPDATE 2014-08-04**: Android 5.0 and higher have different behavior
-with respect to this issue, described later in this document.
+with respect to this issue, described [later in this document](https://github.com/commonsguy/cwac-security/blob/master/PERMS.md#android-50-behavior).
 
 ## Scenarios
 
