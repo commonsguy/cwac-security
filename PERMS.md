@@ -12,8 +12,8 @@ Here, we will walk through some
 scenarios and show where the problems arise, plus discuss how to
 mitigate them as best we can.
 
-**UPDATE 2014-08-04**: The "L" Developer Preview has different behavior
-with respect to this issue, described [later in this document](https://github.com/commonsguy/cwac-security/blob/master/PERMS.md#l-developer-preview-behavior).
+**UPDATE 2014-08-04**: Android 5.0 and higher have different behavior
+with respect to this issue, described later in this document.
 
 ## Scenarios
 
@@ -307,9 +307,9 @@ for us, and we can proceed as normal.
 provides some helper code to detect
 other apps defining the same custom permissions that you define.
 
-## "L" Developer Preview Behavior
+## Android 5.0+ Behavior
 
-The "L" Developer Preview only allows apps signed with the same signing key to define the same `<permission>`
+Android 5.0 and higher only allow apps signed with the same signing key to define the same `<permission>`
 element. If a user tries to install an app that defines the same `<permission>` element as does some other already-installed
 app, and the two apps are not signed by the same signing key, the second app's installation fails with an
 `INSTALL_FAILED_DUPLICATE_PERMISSION` error. The actual `protectionLevel` of the `<permission>` does not
