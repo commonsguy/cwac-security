@@ -10,6 +10,9 @@ At present, it contains:
 static method, to help you detect if another app has defined your
 custom permissions before your app was installed
 
+- a `RuntimePermissionUtils` class to help you with the
+Android 6.0+ runtime permission system
+
 - a `TrustManagerBuilder` to help you create a custom `TrustManager`,
 describing what sorts of SSL certificates you want to support in your
 HTTPS operations
@@ -30,12 +33,12 @@ blocks to your `build.gradle` file:
 ```groovy
 repositories {
     maven {
-        url "https://repo.commonsware.com.s3.amazonaws.com"
+        url "https://s3.amazonaws.com/repo.commonsware.com"
     }
 }
 
 dependencies {
-    compile 'com.commonsware.cwac:security:0.5.+'
+    compile 'com.commonsware.cwac:security:0.6.+'
 }
 ```
 
@@ -123,6 +126,53 @@ with the information, including:
 servers, so you can track possible malware attacks targeting
 your application and users
 
+Usage: `RuntimePermissionUtils`
+-------------------------------
+Create an instance using the constructor, passing in any handy
+`Context`, such as your `Activity`:
+
+```java
+utils=new RuntimePermissionUtils(this);
+```
+
+From there, you can call the following on the instance, regardless
+of API level of the device that you are on:
+
+- `haveEverRequestedPermission()`, which takes the name of
+a `dangerous` permission (e.g., `Manifest.permission.READ_CONTACTS`)
+and returns `true` if you have ever called `markPermissionAsRequested()`
+for that same permission. Use this to track whether or not you
+have asked for permissions that you are not automatically asking
+for on the first run of your app.
+
+- `hasPermission()`, which takes the name of a `dangerous` permission
+and returns `true` if the user has granted you the permission,
+`false` otherwise.
+
+- `shouldShowRationale()`, which takes an `Activity` plus the name
+of a `dangerous` permission and returns `true` if you previously
+requested the permission and the user denied it, or `false` otherwise.
+Use this to determine if you should be showing some information to
+the user to help convince them to grant you the permission in some
+subsequent `requestPermissions()` call.
+
+- `wasPermissionRejected()`, which takes an `Activity` plus the name
+of a `dangerous` permission and returns `true` if you previously
+requested the permission, the user denied it, and the use checked
+the "don't ask again" checkbox. Use this to determine if you need
+to direct the user to the Settings app in order to grant you the
+permission manually.
+
+- `netPermissions()`, which takes a `String[]` of permission names
+that you want to pass to `requestPermissions()`, and returns the
+subset of that array representing the permissions that you do not
+yet hold. This allows you to declare the `String[]` as a
+`final static` constant, yet does not force the user to have to click
+through dialogs for permissions they have already granted.
+
+The `demoRuntimePerms/` project in this repo demonstrates the use
+of these methods.
+
 Usage: `TrustManagerBuilder`
 ----------------------------
 To keep this README to a sensible length, discussion of `TrustManagerBuilder`
@@ -184,7 +234,7 @@ with minor modifications to make it a bit more Android-friendly.
 
 Dependencies
 ------------
-This project has no runtime dependencies. It is tested and supported on API Level 8 and
+This project has no runtime dependencies. It is tested and supported on API Level 9 and
 higher. It may well work on older devices, though that is unsupported and untested.
 If you determine that
 the library (not the demos) do not work on an older-yet-relevant
@@ -197,7 +247,8 @@ has only been done using `HttpsURLConnection` and `OkHttp`. It should work with
 
 Version
 -------
-This is version v0.5.2 of this module, meaning it is rather new.
+This is version v0.6.0 of this module, meaning it is coming along
+rather nicely.
 
 Demo
 ----
@@ -216,6 +267,9 @@ file an [issue](https://github.com/commonsguy/cwac-security/issues).
 There is an instrumentation test suite in the `androidTest`
 sourceset of the main `security` module. It contains a `ZipUtilsTest`
 class that tests the `ZipUtils` code.
+
+The `demoRuntimePerms/` project in this repo demonstrates the use
+of `RuntimePermissionUtils`.
 
 License
 -------
@@ -245,6 +299,7 @@ the fence may work, but it may not.
 
 Release Notes
 -------------
+- v0.6.0: added `RuntimePermissionUtils`
 - v0.5.2: require the destination directory for `unzip()` to be empty or not exist
 - v0.5.1: added `sync()` call to ensure stuff written to disk by the time `unzip()` returns
 - v0.5.0: reorganized `security` into official Android Studio structure, added `ZipUtils`
