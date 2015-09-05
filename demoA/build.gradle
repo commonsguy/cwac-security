@@ -2,13 +2,13 @@ apply plugin: 'com.android.application'
 
 repositories {
     maven {
-        url "https://repo.commonsware.com.s3.amazonaws.com"
+        url "https://s3.amazonaws.com/repo.commonsware.com"
     }
 }
 
 dependencies {
     debugCompile project(':security')
-    releaseCompile 'com.commonsware.cwac:security:0.4.+'
+    releaseCompile 'com.commonsware.cwac:security:0.6.+'
 }
 
 android {
