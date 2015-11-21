@@ -271,6 +271,11 @@ class that tests the `ZipUtils` code.
 The `demoRuntimePerms/` project in this repo demonstrates the use
 of `RuntimePermissionUtils`.
 
+Additional Documentation
+------------------------
+[The Busy Coder's Guide to Android Development](https://commonsware.com/Android)
+demonstrates everything from this library, over a series of chapters.
+
 License
 -------
 The code in this project is licensed under the Apache
