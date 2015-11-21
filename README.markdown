@@ -287,7 +287,9 @@ and stack traces if you are encountering crashes.
 
 If you have encountered what is clearly a bug, or if you have a feature request,
 please post an [issue](https://github.com/commonsguy/cwac-security/issues).
-Be certain to include complete steps for reproducing the issue.
+The [contribution guidelines](CONTRIBUTING.md)
+provide some suggestions for how to create a bug report that will get
+the problem fixed the fastest.
 
 Do not ask for help via Twitter.
 
@@ -296,6 +298,7 @@ on the code with an eye for contributing something back,
 please open an issue that we can use for discussing
 implementation details. Just lobbing a pull request over
 the fence may work, but it may not.
+Again, the [contribution guidelines](CONTRIBUTING.md) should help here.
 
 Release Notes
 -------------
