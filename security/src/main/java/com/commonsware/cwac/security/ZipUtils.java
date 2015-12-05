@@ -105,9 +105,11 @@ public class ZipUtils {
           final String zipCanonicalPath=validateZipEntry(entry.getName(), destDir);
 
           if (entry.isDirectory()) {
-            new File(zipCanonicalPath).mkdir();
+            new File(zipCanonicalPath).mkdirs();
           }
           else {
+            new File(zipCanonicalPath).getParentFile().mkdirs();
+
             final FileOutputStream fos=new FileOutputStream(zipCanonicalPath);
             final BufferedOutputStream dest=new BufferedOutputStream(fos, BUFFER_SIZE);
 

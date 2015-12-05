@@ -247,7 +247,7 @@ has only been done using `HttpsURLConnection` and `OkHttp`. It should work with
 
 Version
 -------
-This is version v0.6.0 of this module, meaning it is coming along
+This is version v0.6.1 of this module, meaning it is coming along
 rather nicely.
 
 Demo
@@ -307,6 +307,7 @@ Again, the [contribution guidelines](CONTRIBUTING.md) should help here.
 
 Release Notes
 -------------
+- v0.6.1: bug fix for unzipping some directory structures
 - v0.6.0: added `RuntimePermissionUtils`
 - v0.5.2: require the destination directory for `unzip()` to be empty or not exist
 - v0.5.1: added `sync()` call to ensure stuff written to disk by the time `unzip()` returns
