@@ -194,6 +194,33 @@ tampered with, whoever does the tampering would likely remove your call to
 `getOwnSignatureHash()` as a part of that tampering. Hence, this will only catch
 stupid attackers, which may or may not be worth the investment in effort.
 
+There is also `validateBroadcastIntent()`, designed to let you
+confirm that you are talking to the proper receiver. You supply:
+
+- any `Context`
+- an `Intent` that you intend to broadcast, probably with
+`setPackageName()` called on it to narrow it down to a single app
+- the expected signature hash of that app
+- a `boolean` flag (`failIfHack`)
+ 
+In general, there are three possible outcomes of calling this method:
+
+1. You get a `SecurityException`, because `failIfHack` is true,
+and we found some receiver whose app does not match the
+desired hash. The user may have installed a repackaged
+version of this app that is signed by the wrong key.
+
+2. You get `null`. If `failIfHack` is `true`, this means that no
+receiver was found that matches the `Intent`. If `failIfHack`
+is `false`, this means that no receiver was found that matches
+the `Intent` and has a valid matching signature.
+
+3. You get an `Intent`. This means we found a matching receiver
+that has a matching signature. The `Intent` will be a copy of
+the passed-in `Intent`, with the component name set to the
+matching receiver, so the "broadcast" will only go to this
+one component.
+
 Usage: ZipUtils
 ---------------
 Use the static `unzip()` methods to unzip a ZIP-style archive. Both methods

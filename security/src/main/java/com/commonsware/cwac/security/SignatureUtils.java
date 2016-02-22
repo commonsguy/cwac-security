@@ -14,12 +14,18 @@
 
 package com.commonsware.cwac.security;
 
+import android.content.ComponentName;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
+import android.content.pm.ResolveInfo;
 import android.content.pm.Signature;
+import android.hardware.Camera;
+import android.util.Log;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.List;
 
 public class SignatureUtils {
   public static String getOwnSignatureHash(Context ctxt)
@@ -59,5 +65,88 @@ public class SignatureUtils {
     }
 
     return new String(hexChars);
+  }
+
+  /**
+   * Confirms that the broadcast receiver for a given Intent
+   * has the desired signature hash.
+   *
+   * If you know the package name of the receiver, call
+   * setPackage() on the Intent before passing into this method.
+   * That will validate whether the package is installed and whether
+   * it has the proper signature hash. You can distinguish between
+   * these cases by passing true for the failIfHack parameter.
+   *
+   * In general, there are three possible outcomes of calling
+   * this method:
+   *
+   * 1. You get a SecurityException, because failIfHack is true,
+   * and we found some receiver whose app does not match the
+   * desired hash. The user may have installed a repackaged
+   * version of this app that is signed by the wrong key.
+   *
+   * 2. You get null. If failIfHack is true, this means that no
+   * receiver was found that matches the Intent. If failIfHack
+   * is false, this means that no receiver was found that matches
+   * the Intent and has a valid matching signature.
+   *
+   * 3. You get an Intent. This means we found a matching receiver
+   * that has a matching signature. The Intent will be a copy of
+   * the passed-in Intent, with the component name set to the
+   * matching receiver, so the "broadcast" will only go to this
+   * one component.
+   *
+   * @param ctxt any Context will do; the value is not retained
+   * @param toValidate the Intent that you intend to broadcast
+   * @param sigHash the signature hash of the app that you expect
+   *                to handle this broadcast
+   * @param failIfHack true if you want a SecurityException if
+   *                   a matching receiver is found but it has
+   *                   the wrong signature hash, false otherwise
+   * @return null if there is no matching receiver with the correct
+   * hash, or a copy of the toValidate parameter with the full component
+   * name of the target receiver added to the Intent
+   */
+  public static Intent validateBroadcastIntent(Context ctxt,
+                                               Intent toValidate,
+                                               String sigHash,
+                                               boolean failIfHack) {
+    PackageManager pm=ctxt.getPackageManager();
+    Intent result=null;
+    List<ResolveInfo> receivers=
+      pm.queryBroadcastReceivers(toValidate,
+        PackageManager.MATCH_ALL);
+
+    if (receivers!=null) {
+      for (ResolveInfo info : receivers) {
+        try {
+          if (getSignatureHash(ctxt,
+            info.activityInfo.packageName)
+            .equals(sigHash)) {
+            ComponentName cn=
+              new ComponentName(info.activityInfo.packageName,
+                info.activityInfo.name);
+
+            result=new Intent(toValidate).setComponent(cn);
+            break;
+          }
+          else if (failIfHack) {
+            throw new SecurityException(
+              "Package has signature hash mismatch: "+
+                info.activityInfo.packageName);
+          }
+        }
+        catch (NoSuchAlgorithmException e) {
+          Log.w("SignatureUtils",
+            "Exception when computing signature hash", e);
+        }
+        catch (NameNotFoundException e) {
+          Log.w("SignatureUtils",
+            "Exception when computing signature hash", e);
+        }
+      }
+    }
+
+    return(result);
   }
 }
