@@ -284,7 +284,7 @@ has only been done using `HttpsURLConnection` and `OkHttp`. It should work with
 
 Version
 -------
-This is version v0.6.2 of this module, meaning it is coming along
+This is version v0.6.3 of this module, meaning it is coming along
 rather nicely.
 
 Demo
@@ -344,6 +344,7 @@ Again, the [contribution guidelines](CONTRIBUTING.md) should help here.
 
 Release Notes
 -------------
+- v0.6.3: added more `Intent` validation options
 - v0.6.2: added `validateBroadcastIntent()`
 - v0.6.1: bug fix for unzipping some directory structures
 - v0.6.0: added `RuntimePermissionUtils`
