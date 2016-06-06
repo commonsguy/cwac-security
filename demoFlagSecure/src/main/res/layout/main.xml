@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="wrap_content"
+  android:layout_height="wrap_content"
+  android:gravity="center_horizontal"
+  android:orientation="vertical">
+
+  <Spinner
+    android:id="@+id/spinner"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp"
+    android:spinnerMode="dropdown" />
+
+  <Spinner
+    android:id="@+id/spinner2"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp"
+    android:spinnerMode="dialog" />
+
+  <AutoCompleteTextView
+    android:id="@+id/autocomplete"
+    android:layout_width="200sp"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp"
+    android:completionThreshold="3" />
+</LinearLayout>

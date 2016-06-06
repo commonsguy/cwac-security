@@ -1,0 +1,43 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 23
+    buildToolsVersion "23.0.3"
+
+    defaultConfig {
+        minSdkVersion 15
+        targetSdkVersion 23
+    }
+
+    productFlavors {
+        insecure {
+            applicationId "com.commonsware.cwac.security.flagsecure.demo.insecure"
+            buildConfigField "boolean", "USE_FLAG_SECURE", "false"
+            buildConfigField "boolean", "APPLY_MITIGATION", "false"
+            resValue "string", "activity_label", "FlagSecure: INSECURE"
+        }
+        bug {
+            applicationId "com.commonsware.cwac.security.flagsecure.demo.bug"
+            buildConfigField "boolean", "USE_FLAG_SECURE", "true"
+            buildConfigField "boolean", "APPLY_MITIGATION", "false"
+            resValue "string", "activity_label", "FlagSecure: BUG"
+        }
+        secure {
+            applicationId "com.commonsware.cwac.security.flagsecure.demo.secure"
+            buildConfigField "boolean", "USE_FLAG_SECURE", "true"
+            buildConfigField "boolean", "APPLY_MITIGATION", "true"
+            resValue "string", "activity_label", "FlagSecure: Secure"
+        }
+    }
+}
+
+repositories {
+    maven {
+        url "https://s3.amazonaws.com/repo.commonsware.com"
+    }
+}
+
+dependencies {
+    debugCompile project(':security')
+    releaseCompile 'com.commonsware.cwac:security:0.6.+'
+}

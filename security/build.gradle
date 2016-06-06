@@ -2,11 +2,12 @@ apply plugin: 'com.android.library'
 
 dependencies {
     androidTestCompile 'com.android.support.test:rules:0.3'
+    compile 'com.android.support:support-annotations:23.+'
 }
 
 android {
     compileSdkVersion 23
-    buildToolsVersion "23.0.0"
+    buildToolsVersion "23.0.3"
 
     defaultConfig {
         testApplicationId "com.commonsware.cwac.security.test"

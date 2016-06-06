@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="app_name">AutoCompleteDemo</string>
+  <string name="menu_dialog">Dialog</string>
+  <string name="menu_toast">Toast</string>
+  <string name="msg_toast">You should not see this in the screen recording!</string>
+  <string name="msg_insecure_toast">You will see this in the screen recording, like it or not!</string>
+  <string name="msg_test">This is a test</string>
+</resources>

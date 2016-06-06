@@ -25,6 +25,9 @@ detect whether you are about to be communicating with some hacked version of an 
 a few types of malformed ZIP archives when attempting to unzip the
 contents to your desired directory
 
+- a `FlagSecureHelper` for working around
+[Android framework bugs involving `FLAG_SECURE`](docs/FLAGSECURE.md)
+
 This Android library project is 
 [available as a JAR](https://github.com/commonsguy/cwac-security/releases)
 or as an artifact for use with Gradle. To use that, add the following
@@ -268,6 +271,11 @@ want to move.
 The approach used here is based on
 [CERT's suggested unzip code](https://www.securecoding.cert.org/confluence/display/java/IDS04-J.+Safely+extract+files+from+ZipInputStream),
 with minor modifications to make it a bit more Android-friendly.
+
+Usage: FlagSecureHelper
+-----------------------
+The documentation for `FlagSecureHelper` has been pulled out into
+[a separate page](docs/FLAGSECURE.md).
 
 Dependencies
 ------------
