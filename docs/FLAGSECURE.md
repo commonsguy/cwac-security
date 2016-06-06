@@ -221,8 +221,9 @@ directly.
 
 ## Acknowledgments
 
-The author would like to acknowledge the assistance of an anonymous
-contributor who pointed out this issue.
+The author would like to acknowledge the assistance of
+Vivart Pandey, who
+[pointed out the problem](https://stackoverflow.com/q/37332077/115145).
 
 ## Timeline
 
