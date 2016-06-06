@@ -39,5 +39,5 @@ repositories {
 
 dependencies {
     debugCompile project(':security')
-    releaseCompile 'com.commonsware.cwac:security:0.6.+'
+    releaseCompile 'com.commonsware.cwac:security:0.7.+'
 }

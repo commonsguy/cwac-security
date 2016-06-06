@@ -10,7 +10,7 @@ dependencies {
     compile 'com.commonsware.cwac:cam2:0.2.+'
     compile 'com.githang:com-phillipcalvin-iconbutton:1.0.1@aar'
     debugCompile project(':security')
-    releaseCompile 'com.commonsware.cwac:security:0.6.+'
+    releaseCompile 'com.commonsware.cwac:security:0.7.+'
 }
 
 android {
