@@ -22,10 +22,17 @@ import android.os.Build;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
+import android.widget.Button;
+import android.widget.ListPopupWindow;
+import android.widget.PopupMenu;
+import android.widget.PopupWindow;
 import android.widget.ShareActionProvider;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -41,6 +48,7 @@ public class MainActivity extends Activity {
     "vel", "ligula", "vitae", "arcu", "aliquet", "mollis", "etiam",
     "vel", "erat", "placerat", "ante", "porttitor", "sodales",
     "pellentesque", "augue", "purus"};
+  private View popupAnchor;
 
   public static boolean usesFlagSecure(Context ctxt) {
     if (ctxt instanceof Activity) {
@@ -70,6 +78,7 @@ public class MainActivity extends Activity {
     }
 
     setContentView(R.layout.main);
+    popupAnchor=findViewById(R.id.popup_anchor);
 
     AutoCompleteTextView autocomplete=
       (AutoCompleteTextView)findViewById(R.id.autocomplete);
@@ -133,6 +142,18 @@ public class MainActivity extends Activity {
         }
 
         return(true);
+
+      case R.id.popup_window:
+        showPopupWindow();
+        return(true);
+
+      case R.id.popup_menu:
+        showPopupMenu();
+        return(true);
+
+      case R.id.list_popup_window:
+        showListPopupWindow();
+        return(true);
     }
 
     return(super.onOptionsItemSelected(item));
@@ -151,6 +172,64 @@ public class MainActivity extends Activity {
 
   protected void showTestDialog() {
     new SampleDialogFragment().show(getFragmentManager(), "sample");
+  }
+
+  protected void showPopupWindow() {
+    Button popupContent=new Button(this);
+
+    popupContent.setText(R.string.label_click);
+    popupContent.setLayoutParams(new ViewGroup.LayoutParams(
+      ViewGroup.LayoutParams.WRAP_CONTENT,
+      ViewGroup.LayoutParams.WRAP_CONTENT));
+    popupContent.measure(View.MeasureSpec.UNSPECIFIED,
+      View.MeasureSpec.UNSPECIFIED);
+
+    final PopupWindow popup=
+      new PopupWindow(popupContent, popupContent.getMeasuredWidth(),
+        popupContent.getMeasuredHeight(), true);
+
+    popupContent.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View v) {
+        popup.dismiss();
+      }
+    });
+
+    popup.showAsDropDown(popupAnchor);
+  }
+
+  protected void showPopupMenu() {
+    final PopupMenu popup=new PopupMenu(this, popupAnchor);
+
+    popup.inflate(R.menu.popup);
+    popup.setOnMenuItemClickListener(
+      new PopupMenu.OnMenuItemClickListener() {
+        @Override
+        public boolean onMenuItemClick(MenuItem item) {
+          popup.dismiss();
+          return(true);
+        }
+      });
+    popup.show();
+  }
+
+  protected void showListPopupWindow() {
+    ArrayAdapter<String> adapter=
+      new ArrayAdapter<>(this, android.R.layout.simple_list_item_1,
+        ITEMS);
+    final ListPopupWindow popup=new ListPopupWindow(this);
+
+    popup.setAnchorView(popupAnchor);
+    popup.setAdapter(adapter);
+    popup.setOnItemClickListener(
+      new AdapterView.OnItemClickListener() {
+        @Override
+        public void onItemClick(AdapterView<?> parent, View view,
+                                int position, long id) {
+          popup.dismiss();
+        }
+      });
+    popup.show();
   }
 
   static boolean fixFlagSecure() {

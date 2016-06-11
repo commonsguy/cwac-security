@@ -6,4 +6,10 @@
   <string name="msg_toast">You should not see this in the screen recording!</string>
   <string name="msg_insecure_toast">You will see this in the screen recording, like it or not!</string>
   <string name="msg_test">This is a test</string>
+  <string name="menu_popupwindow">PopupWindow</string>
+  <string name="menu_share">Share</string>
+  <string name="btn_some">Some Button</string>
+  <string name="label_click">Click me!</string>
+  <string name="menu_popupmenu">PopupMenu</string>
+  <string name="menu_listpopupwindow">ListPopupWindow</string>
 </resources>
