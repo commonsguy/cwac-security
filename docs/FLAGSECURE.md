@@ -29,6 +29,9 @@ This has been demonstrated to affect:
 - `ShareActionProvider`
 - `Dialog` and subclasses (e.g., `AlertDialog`)
 - `Toast`
+- `PopupWindow`
+- `ListPopupWindow`
+- `PopupMenu`
 
 Of these, only the `Dialog` offers us access to its `Window`, on which
 we could apply `FLAG_SECURE`, for developers that realize that this is
@@ -53,9 +56,7 @@ this bug might also affect:
 - `Snackbar`
 - context menus
 
-These have not yet been tested. Also, there are no official tests
-yet for the underlying widgets used for many of these popups: `PopupWindow`,
-`ListPopupWindow`, and `PopupMenu`.
+These have not yet been tested.
 
 Google has officially stated that
 [all of this is working as intended](https://code.google.com/p/android/issues/detail?id=210590).
