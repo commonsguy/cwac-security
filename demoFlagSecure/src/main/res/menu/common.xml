@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+  <item
+    android:id="@+id/dialog"
+    android:showAsAction="never"
+    android:title="@string/menu_dialog" />
+  <item
+    android:id="@+id/toast"
+    android:showAsAction="never"
+    android:title="@string/menu_toast" />
+  <item
+    android:id="@+id/popup_window"
+    android:showAsAction="never"
+    android:title="@string/menu_popupwindow" />
+  <item
+    android:id="@+id/popup_menu"
+    android:showAsAction="never"
+    android:title="@string/menu_popupmenu" />
+  <item
+    android:id="@+id/list_popup_window"
+    android:showAsAction="never"
+    android:title="@string/menu_listpopupwindow" />
+</menu>

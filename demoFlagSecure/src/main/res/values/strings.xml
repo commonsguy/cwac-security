@@ -12,4 +12,5 @@
   <string name="label_click">Click me!</string>
   <string name="menu_popupmenu">PopupMenu</string>
   <string name="menu_listpopupwindow">ListPopupWindow</string>
+  <string name="btn_context_menu">Context Menu</string>
 </resources>

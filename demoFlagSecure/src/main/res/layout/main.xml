@@ -11,6 +11,12 @@
     android:layout_height="wrap_content"
     android:text="@string/btn_some" />
 
+  <Button
+    android:id="@+id/context_menu"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="@string/btn_context_menu" />
+
   <Spinner
     android:id="@+id/spinner"
     android:layout_width="wrap_content"

@@ -20,6 +20,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -104,11 +105,22 @@ public class MainActivity extends Activity {
       .setDropDownViewResource(
         android.R.layout.simple_spinner_dropdown_item);
     spinner.setAdapter(adapter);
+
+    final View contextMenu=findViewById(R.id.context_menu);
+
+    registerForContextMenu(contextMenu);
+    contextMenu.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View v) {
+        openContextMenu(contextMenu);
+      }
+    });
   }
 
   @Override
   public boolean onCreateOptionsMenu(Menu menu) {
     getMenuInflater().inflate(R.menu.actions, menu);
+    getMenuInflater().inflate(R.menu.common, menu);
 
     share=
       (ShareActionProvider)menu.findItem(R.id.share)
@@ -118,6 +130,14 @@ public class MainActivity extends Activity {
     share.setShareIntent(shareIntent);
 
     return(super.onCreateOptionsMenu(menu));
+  }
+
+  @Override
+  public void onCreateContextMenu(ContextMenu menu, View v,
+                                  ContextMenu.ContextMenuInfo menuInfo) {
+    super.onCreateContextMenu(menu, v, menuInfo);
+
+    getMenuInflater().inflate(R.menu.common, menu);
   }
 
   @Override
@@ -157,6 +177,11 @@ public class MainActivity extends Activity {
     }
 
     return(super.onOptionsItemSelected(item));
+  }
+
+  @Override
+  public boolean onContextItemSelected(MenuItem item) {
+    return(onOptionsItemSelected(item));
   }
 
   @Override
