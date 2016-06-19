@@ -32,6 +32,7 @@ This has been demonstrated to affect:
 - `PopupWindow`
 - `ListPopupWindow`
 - `PopupMenu`
+- legacy context menus
 
 Of these, only the `Dialog` offers us access to its `Window`, on which
 we could apply `FLAG_SECURE`, for developers that realize that this is
@@ -54,7 +55,6 @@ this bug might also affect:
 - `appcompat-v7` ports of those elements (e.g., its own overflow)
 - `Toolbar` (and its `appcompat-v7` port)
 - `Snackbar`
-- context menus
 
 These have not yet been tested.
 
