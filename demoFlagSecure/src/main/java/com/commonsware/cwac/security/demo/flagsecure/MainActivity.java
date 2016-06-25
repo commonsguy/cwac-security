@@ -37,6 +37,8 @@ import android.widget.PopupWindow;
 import android.widget.ShareActionProvider;
 import android.widget.Spinner;
 import android.widget.Toast;
+import android.widget.Toolbar;
+import android.widget.Toolbar.OnMenuItemClickListener;
 import com.commonsware.cwac.security.flagsecure.FlagSecureHelper;
 
 @TargetApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH)
@@ -115,6 +117,19 @@ public class MainActivity extends Activity {
         openContextMenu(contextMenu);
       }
     });
+
+    if (Build.VERSION.SDK_INT>=Build.VERSION_CODES.LOLLIPOP) {
+      Toolbar tb=(Toolbar)findViewById(R.id.toolbar);
+
+      tb.setTitle("Toolbar");
+      tb.inflateMenu(R.menu.common);
+      tb.setOnMenuItemClickListener(new OnMenuItemClickListener() {
+        @Override
+        public boolean onMenuItemClick(MenuItem item) {
+          return(onOptionsItemSelected(item));
+        }
+      });
+    }
   }
 
   @Override
