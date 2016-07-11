@@ -26,6 +26,7 @@ import java.security.cert.CertificateFactory;
 import javax.net.ssl.TrustManager;
 import javax.net.ssl.TrustManagerFactory;
 
+@Deprecated
 public class TrustManagers {
   public static TrustManager[] useTrustStore(InputStream in,
                                              char[] password,

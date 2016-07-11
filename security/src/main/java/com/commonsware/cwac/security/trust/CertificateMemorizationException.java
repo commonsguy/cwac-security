@@ -16,6 +16,7 @@ package com.commonsware.cwac.security.trust;
 
 import java.security.cert.CertificateException;
 
+@Deprecated
 public class CertificateMemorizationException extends
     CertificateException {
 

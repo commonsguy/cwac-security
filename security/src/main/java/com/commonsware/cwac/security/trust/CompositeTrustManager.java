@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import javax.net.ssl.X509TrustManager;
 
+@Deprecated
 public class CompositeTrustManager implements X509TrustManager {
   private ArrayList<X509TrustManager> managers=
       new ArrayList<X509TrustManager>();
@@ -105,7 +106,7 @@ public class CompositeTrustManager implements X509TrustManager {
 
     for (X509TrustManager mgr : managers) {
       try {
-        mgr.checkClientTrusted(chain, authType);
+        mgr.checkServerTrusted(chain, authType);
 
         if (!matchAll) {
           return;

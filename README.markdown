@@ -13,10 +13,6 @@ custom permissions before your app was installed
 - a `RuntimePermissionUtils` class to help you with the
 Android 6.0+ runtime permission system
 
-- a `TrustManagerBuilder` to help you create a custom `TrustManager`,
-describing what sorts of SSL certificates you want to support in your
-HTTPS operations
-
 - a `SignatureUtils` class to help you determine the SHA-256 hash of the
 signing key of some package, to compare against known values, to help
 detect whether you are about to be communicating with some hacked version of an app
@@ -27,6 +23,10 @@ contents to your desired directory
 
 - a `FlagSecureHelper` for working around
 [Android framework bugs involving `FLAG_SECURE`](docs/FLAGSECURE.md)
+
+**NOTE**: the `TrustManagerBuilder` implementation in this project
+is deprecated, replaced by a similar class in
+[the CWAC-NetSecurity library](https://github.com/commonsguy/cwac-netsecurity).
 
 This Android library project is 
 [available as a JAR](https://github.com/commonsguy/cwac-security/releases)
@@ -175,11 +175,6 @@ through dialogs for permissions they have already granted.
 
 The `demoRuntimePerms/` project in this repo demonstrates the use
 of these methods.
-
-Usage: `TrustManagerBuilder`
-----------------------------
-To keep this README to a sensible length, discussion of `TrustManagerBuilder`
-is broken out into [its own page](https://github.com/commonsguy/cwac-security/blob/master/TrustManagerBuilder.markdown).
 
 Usage: SignatureUtils
 ---------------------
@@ -352,6 +347,7 @@ Again, the [contribution guidelines](CONTRIBUTING.md) should help here.
 
 Release Notes
 -------------
+- v0.8.0: deprecated `TrustManagerBuilder`, moving it to [CWAC-NetSecurity](https://github.com/commonsguy/cwac-netsecurity)
 - v0.7.0: added `FlagSecureHelper`, demo project, and related docs
 - v0.6.3: added more `Intent` validation options
 - v0.6.2: added `validateBroadcastIntent()`

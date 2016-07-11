@@ -34,6 +34,7 @@ import javax.net.ssl.X509TrustManager;
  * https://github.com/ge0rg/MemorizingTrustManager, but
  * designed to be used by TrustManagerBuilder.
  */
+@Deprecated
 public class MemorizingTrustManager implements X509TrustManager {
   private KeyStore keyStore=null;
   private Options options=null;

@@ -8,7 +8,7 @@ repositories {
 
 dependencies {
     debugCompile project(':security')
-    releaseCompile 'com.commonsware.cwac:security:0.7.+'
+    releaseCompile 'com.commonsware.cwac:security:0.8.+'
 }
 
 android {

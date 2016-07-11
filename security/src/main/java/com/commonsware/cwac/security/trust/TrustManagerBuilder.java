@@ -46,6 +46,7 @@ import javax.net.ssl.X509TrustManager;
  * TrustManager in a TrustManager[], which many APIs
  * require).
  */
+@Deprecated
 public class TrustManagerBuilder {
   private static final String X509="X.509";
   private static final String BKS="BKS";
