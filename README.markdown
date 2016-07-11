@@ -41,7 +41,7 @@ repositories {
 }
 
 dependencies {
-    compile 'com.commonsware.cwac:security:0.7.+'
+    compile 'com.commonsware.cwac:security:0.8.+'
 }
 ```
 
@@ -287,7 +287,7 @@ has only been done using `HttpsURLConnection` and `OkHttp`. It should work with
 
 Version
 -------
-This is version v0.7.0 of this module, meaning it is coming along
+This is version v0.8.0 of this module, meaning it is coming along
 rather nicely.
 
 Demo
@@ -297,12 +297,6 @@ In the `demoA/` sub-project you will find an application that uses
 defined a custom permission. The `demoB/` sub-project does not
 use CWAC-Security, but defines that permission, so that you can
 verify that `demoA` works as expected.
-
-There is no demo app for `TrustStoreBuilder` at this time. If you are
-aware of a public server that either uses a self-signed certificate or
-a private certificate authority, one for which a demo app might make sense,
-and one where the maintainer of the server will not mind, please
-file an [issue](https://github.com/commonsguy/cwac-security/issues).
 
 There is an instrumentation test suite in the `androidTest`
 sourceset of the main `security` module. It contains a `ZipUtilsTest`
