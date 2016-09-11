@@ -1,1 +1,1 @@
-include ':security', ':demoA', ':demoB', ':demoC', ':demoMemo', ':demoRuntimePerms', ':demoFlagSecure'
+include ':security', ':demoA', ':demoB', ':demoC', ':demoRuntimePerms', ':demoFlagSecure'
