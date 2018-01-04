@@ -330,7 +330,12 @@ The [contribution guidelines](CONTRIBUTING.md)
 provide some suggestions for how to create a bug report that will get
 the problem fixed the fastest.
 
-Do not ask for help via Twitter.
+You are also welcome to join
+[the CommonsWare Community](https://community.commonsware.com/)
+and post questions
+and ideas to [the CWAC category](https://community.commonsware.com/c/cwac).
+
+Do not ask for help via social media.
 
 Also, if you plan on hacking
 on the code with an eye for contributing something back,
