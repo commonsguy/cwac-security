@@ -1,6 +1,8 @@
 CWAC Security: Helping You Help Your Users Defend Their Data
 ============================================================
 
+**UPDATE 2021-05-08**: This project is discontinued. This repository will be removed from public access on or after 1 December 2021.
+
 This project contains utility code related to Android security
 measures.
 
